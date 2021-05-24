@@ -5,24 +5,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.x5s.connecting_your_app_to_the_internet.api.DrinkDetail
+import com.x5s.connecting_your_app_to_the_internet.api.Result
 import com.x5s.connecting_your_app_to_the_internet.api.Repository
+import com.x5s.connecting_your_app_to_the_internet.api.ResultDetail
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class DetailFragmentViewModel(private val repository: Repository): ViewModel(){
 
-    private val _drinksDetailLiveData = MutableLiveData<List<DrinkDetail>>()
+    private val _resultDetailLiveData = MutableLiveData<List<ResultDetail>>()
 
-    val drinkDetailLiveData: LiveData<List<DrinkDetail>>
-    get() = _drinksDetailLiveData
+    val resultDetailLiveData: LiveData<List<ResultDetail>>
+    get() = _resultDetailLiveData
 
     private val TAG = DetailFragmentViewModel::class.java.simpleName
 
-    fun getDrinksDetail(id:String){
+    fun getResult(id:String){
         try {
             viewModelScope.launch {
-                _drinksDetailLiveData.value = repository.getDrinkDetails(id).drinks
+                _resultDetailLiveData.value = repository.getResultDetails(id).results
             }
         }catch (e:Exception){
             Log.e(TAG,e.message.toString())

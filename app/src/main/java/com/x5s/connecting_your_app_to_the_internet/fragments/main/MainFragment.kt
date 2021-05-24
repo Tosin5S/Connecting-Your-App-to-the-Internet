@@ -12,14 +12,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.x5s.connecting_your_app_to_the_internet.R
 import com.x5s.connecting_your_app_to_the_internet.api.Api
-import com.x5s.connecting_your_app_to_the_internet.api.Drink
+import com.x5s.connecting_your_app_to_the_internet.api.Result
 import com.x5s.connecting_your_app_to_the_internet.api.Repository
 import com.x5s.connecting_your_app_to_the_internet.databinding.FragmentMainBinding
 
 class MainFragment:Fragment() {
 
     private var binding: FragmentMainBinding? = null
-    private var drinks = mutableListOf<Drink>()
+    private var results = mutableListOf<Result>()
 
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this, MainViewModelFactory(Repository(Api.apiService)))
@@ -37,24 +37,24 @@ class MainFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.drinksLiveData.observe(viewLifecycleOwner, Observer {
-            drinks.addAll(it)
+        viewModel.resultLiveData.observe(viewLifecycleOwner, Observer {
+            results.addAll(it)
         })
-        val adapter = MainAdapter(drinks){
+        val adapter = MainAdapter(results){
             requireView().findNavController().navigate(
                     R.id.action_mainFragment_to_detailFragment,
-            bundleOf(ID_ARGS to it.drinkId)
+            bundleOf(ID_ARGS to it.resultId)
             )
         }
-        binding?.cocktailRv?.layoutManager =
+        binding?.rickAndMortyRv?.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding?.cocktailRv?.visibility = View.VISIBLE
-        binding?.cocktailRv?.adapter = adapter
+        binding?.rickAndMortyRv?.visibility = View.VISIBLE
+        binding?.rickAndMortyRv?.adapter = adapter
 
     }
 
         companion object {
-           val ID_ARGS = MainFragment::class.java.simpleName + "Drink-id"
+           val ID_ARGS = MainFragment::class.java.simpleName + "Result-id"
     }
 
 }

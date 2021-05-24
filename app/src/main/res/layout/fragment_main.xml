@@ -7,7 +7,7 @@
     tools:context=".fragments.main.MainFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cocktailRv"
+        android:id="@+id/rickAndMortyRv"
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

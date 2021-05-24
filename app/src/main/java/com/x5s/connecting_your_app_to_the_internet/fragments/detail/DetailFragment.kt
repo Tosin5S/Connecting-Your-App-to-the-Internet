@@ -9,15 +9,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.x5s.connecting_your_app_to_the_internet.api.Api
-import com.x5s.connecting_your_app_to_the_internet.api.DrinkDetail
 import com.x5s.connecting_your_app_to_the_internet.api.Repository
+import com.x5s.connecting_your_app_to_the_internet.api.ResultDetail
 import com.x5s.connecting_your_app_to_the_internet.databinding.FragmentDetailBinding
 import com.x5s.connecting_your_app_to_the_internet.fragments.main.MainFragment.Companion.ID_ARGS
 
 class DetailFragment: Fragment() {
 
     private var binding : FragmentDetailBinding? = null
-    private val drinksDetail = mutableListOf<DrinkDetail>()
+    private val resultDetail = mutableListOf<ResultDetail>()
 
     private val viewModel: DetailFragmentViewModel by lazy{
         ViewModelProvider(
@@ -37,18 +37,18 @@ class DetailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        //viewModel.getDrinksDetail()
+        //viewModel.getResultDetails()
         var id = ""
         arguments?.let{
             id = it.getString(ID_ARGS).toString()
         }
-        viewModel.getDrinksDetail(id)
-        viewModel.drinkDetailLiveData.observe(viewLifecycleOwner, Observer{
-           drinksDetail.addAll(it)
+        viewModel.getResult(id)
+        viewModel.resultDetailLiveData.observe(viewLifecycleOwner, Observer{
+           resultDetail.addAll(it)
         })
 
-        binding?.instructionTv?.text = drinksDetail[0].instruction
-        binding?.thumbIv?.load(drinksDetail[0].drinkThumb)
-        activity?.title = drinksDetail[0].drinkName
+        binding?.nameTv?.text = resultDetail[0].resultName
+        binding?.imageIv?.load(resultDetail[0].resultImage)
+        activity?.title = resultDetail[0].resultName
     }
 }

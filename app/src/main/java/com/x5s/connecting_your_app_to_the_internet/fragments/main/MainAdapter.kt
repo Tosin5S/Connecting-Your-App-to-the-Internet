@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.x5s.connecting_your_app_to_the_internet.api.Drink
+import com.x5s.connecting_your_app_to_the_internet.api.Result
 import com.x5s.connecting_your_app_to_the_internet.databinding.ItemRvBinding
 
 class MainAdapter(
-        private val drinks: List<Drink>, private val listener: (Drink) -> Unit
+        private val results: List<Result>, private val listener: (Result) -> Unit
 ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
 
@@ -23,22 +23,22 @@ class MainAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(drinks[position])
+        holder.bind(results[position])
     }
 
     inner class MainViewHolder(private val binding: ItemRvBinding) :
             RecyclerView.ViewHolder(binding.root){
-        fun bind(drink: Drink){
-            binding.title.text = drink.drinkName
-            binding.thumbIv.load(drink.drinkThumb)
+        fun bind(result: Result){
+            binding.title.text = result.resultName
+            binding.imageIv.load(result.resultImage)
             binding.root.setOnClickListener{
-                listener.invoke(drink)
+                listener.invoke(result)
             }
         }
     }
 
 
     override fun getItemCount(): Int {
-        return drinks.size
+        return results.size
     }
 }
