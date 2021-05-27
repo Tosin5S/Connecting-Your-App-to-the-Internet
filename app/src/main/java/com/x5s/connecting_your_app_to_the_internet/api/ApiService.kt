@@ -7,21 +7,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//https://www.the.cocktaildb.com/api/json/v1/
-
-//www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic
-
-//www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
-
 private val BASE_URL = "https://rickandmortyapi.com/api/character/"
 
 interface ApiService{
 
     @GET("")
-    suspend fun getResults(@Query("page=1")result:String):ResultResponse
+    suspend fun getResults(@Query("page")results:String):ResultResponse
 
-    @GET("")
-    suspend fun getResultDetails(@Query("page=1")resultId:String):ResultDetailResponse
 }
 
 val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()

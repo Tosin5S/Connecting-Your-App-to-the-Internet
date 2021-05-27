@@ -1,4 +1,4 @@
-package com.x5s.connecting_your_app_to_the_internet.fragments.main
+package com.x5s.connecting_your_app_to_the_internet
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -24,7 +24,7 @@ class MainViewModel(private val repository: Repository):ViewModel() {
     private fun getResult() {
         viewModelScope.launch {
             try {
-                _resultLiveData.value = repository.getResults("results").results
+                _resultLiveData.value = repository.getResults("1").results
                 Log.d(TAG, "${_resultLiveData.value}")
             } catch (e: Exception) {
                 Log.e(TAG, e.message.toString())

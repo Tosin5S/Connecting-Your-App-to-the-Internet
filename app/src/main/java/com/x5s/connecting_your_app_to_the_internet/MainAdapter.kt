@@ -1,4 +1,4 @@
-package com.x5s.connecting_your_app_to_the_internet.fragments.main
+package com.x5s.connecting_your_app_to_the_internet
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,14 +29,14 @@ class MainAdapter(
     inner class MainViewHolder(private val binding: ItemRvBinding) :
             RecyclerView.ViewHolder(binding.root){
         fun bind(result: Result){
-            binding.title.text = result.resultName
-            binding.imageIv.load(result.resultImage)
-            binding.root.setOnClickListener{
-                listener.invoke(result)
+            binding.name.text = result.resultName
+            binding.species.text = result.resultSpecies
+            binding.status.text = result.resultStatus
+            binding.image.load(result.resultImage)
+            //binding.root.setOnClickListener{
+                //listener.invoke(result)}
             }
         }
-    }
-
 
     override fun getItemCount(): Int {
         return results.size

@@ -4,5 +4,4 @@ class Repository(private val apiService: ApiService) {
 
     suspend fun getResults(results: String)  = apiService.getResults(results)
 
-    suspend fun getResultDetails(id:String) = apiService.getResultDetails(id)
 }

@@ -1,4 +1,4 @@
-package com.x5s.connecting_your_app_to_the_internet.fragments.main
+package com.x5s.connecting_your_app_to_the_internet
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
