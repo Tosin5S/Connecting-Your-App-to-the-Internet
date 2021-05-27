@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rickAndMortyRv"
+        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/main_nav"
-        tools:layout_editor_absoluteX="187dp"
-        tools:layout_editor_absoluteY="351dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>
