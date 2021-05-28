@@ -1,5 +1,6 @@
 package com.x5s.connecting_your_app_to_the_internet
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,25 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MainAdapter(
-        private val results: List<Property>
+class MainAdapter(private val context: Context,
+                  private val results: List<Result?>?
 ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    class MainViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    class MainViewHolder(view: View): RecyclerView.ViewHolder(view){
 
-        fun bind(property: Property){
-            val nameTv = view.findViewById<TextView>(R.id.name)
-            val statusTv = view.findViewById<TextView>(R.id.status)
-            val speciesTv = view.findViewById<TextView>(R.id.species)
-            val imageIv = view.findViewById<ImageView>(R.id.image)
-
-            nameTv.text = property.name
-            statusTv.text = property.status
-            speciesTv.text = property.species
-
-            Glide.with(view.context).load(property.image).centerCrop().into(imageIv)
-
-        }
+            val nameTv:TextView = view.findViewById(R.id.name)
+            val statusTv:TextView = view.findViewById(R.id.status)
+            val speciesTv:TextView = view.findViewById(R.id.species)
+            val imageIv:ImageView = view.findViewById(R.id.image)
     }
 
 
@@ -36,12 +28,27 @@ class MainAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(results[position])
+        val result = results?.get(position)
+        if(results != null) {
+            Glide.with(context).load(result?.image).into(holder.imageIv)
+        }
+        if (results != null){
+            holder.nameTv.text = result?.name
+        }
+        if (results != null){
+            holder.statusTv.text = result?.status
+        }
+        if (results != null){
+            holder.speciesTv.text = result?.species
+        }
     }
 
 
 
     override fun getItemCount(): Int {
-        return results.size
+        if (results != null) {
+            return results.size
+        }
+        return 0
     }
 }

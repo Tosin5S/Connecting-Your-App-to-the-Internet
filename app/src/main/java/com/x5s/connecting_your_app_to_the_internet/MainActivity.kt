@@ -24,21 +24,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getAllData() {
-        apiService.getAllData().enqueue(object: Callback<List<Property>>{
+        apiService.getAllData().enqueue(object: Callback<Property?>{
             override fun onResponse(
-                    call: Call<List<Property>>,
-                    response:Response<List<Property>>
+                    call: Call<Property?>,
+                    response:Response<Property?>
             ){
                 if(response.isSuccessful){
                     recyclerView = findViewById<RecyclerView>(R.id.rickAndMortyRv).apply{
-                        mainAdapter = MainAdapter(response.body()!!)
+                        //val respond:Property? = response.body()
+                        mainAdapter = MainAdapter(context,response.body()!!)
                         layoutManager = manager
                         adapter = mainAdapter
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<Property>>, t: Throwable){
+            override fun onFailure(call: Call<Property?>, t: Throwable){
                 t.printStackTrace()
             }
         })
