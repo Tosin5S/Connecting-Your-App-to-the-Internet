@@ -18,7 +18,7 @@ private val retrofit = Retrofit.Builder().addConverterFactory(MoshiConverterFact
 interface ApiService{
 
     @GET("/api/character")
-    fun getAllData(): Call<Property?>
+    fun getAllData(): Call<List<Result?>?>
 
 }
 

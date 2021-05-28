@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getAllData() {
-        apiService.getAllData().enqueue(object: Callback<Property?>{
+        apiService.getAllData().enqueue(object: Callback<List<Result?>?>{
             override fun onResponse(
-                    call: Call<Property?>,
-                    response:Response<Property?>
+                    call: Call<List<Result?>?>,
+                    response:Response<List<Result?>?>
             ){
                 if(response.isSuccessful){
                     recyclerView = findViewById<RecyclerView>(R.id.rickAndMortyRv).apply{
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<Property?>, t: Throwable){
+            override fun onFailure(call: Call<List<Result?>?>, t: Throwable){
                 t.printStackTrace()
             }
         })
