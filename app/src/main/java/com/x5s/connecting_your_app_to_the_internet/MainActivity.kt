@@ -11,7 +11,6 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var manager: RecyclerView.LayoutManager
     private lateinit var mainAdapter: RecyclerView.Adapter<*>
 
@@ -24,22 +23,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getAllData() {
-        apiService.getAllData().enqueue(object: Callback<List<Result?>?>{
+        val recyclerView: RecyclerView = findViewById(R.id.rickAndMortyRv)
+        apiService.getAllData().enqueue(object: Callback<Property?>{
             override fun onResponse(
-                    call: Call<List<Result?>?>,
-                    response:Response<List<Result?>?>
+                    call: Call<Property?>,
+                    response:Response<Property?>
             ){
                 if(response.isSuccessful){
-                    recyclerView = findViewById<RecyclerView>(R.id.rickAndMortyRv).apply{
-                        //val respond:Property? = response.body()
-                        mainAdapter = MainAdapter(context,response.body()!!)
+                    recyclerView.apply{
+                        val data: List<Result?>? = response.body()!!.list
+                        mainAdapter = MainAdapter(context,data)
                         layoutManager = manager
-                        adapter = mainAdapter
+                        recyclerView.mainAdapter = mainAdapter
+
                     }
+
                 }
             }
 
-            override fun onFailure(call: Call<List<Result?>?>, t: Throwable){
+            override fun onFailure(call: Call<Property?>, t: Throwable){
                 t.printStackTrace()
             }
         })
