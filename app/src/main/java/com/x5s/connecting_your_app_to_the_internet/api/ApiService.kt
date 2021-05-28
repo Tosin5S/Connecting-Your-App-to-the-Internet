@@ -11,7 +11,7 @@ private val BASE_URL = "https://rickandmortyapi.com/api/character/"
 
 interface ApiService{
 
-    @GET("")
+    @GET("/api/character")
     suspend fun getResults(@Query("page")results:String):ResultResponse
 
 }
