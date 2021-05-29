@@ -4,5 +4,5 @@ import com.squareup.moshi.Json
 
  class Property {
     @Json(name = "results")
-    val list: List<Result>? = null
+    var list: List<Result>? = null
 }
