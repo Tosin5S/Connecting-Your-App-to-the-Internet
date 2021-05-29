@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MainAdapter(private val context: Context,private val results: List<Result?>?): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+ internal class MainAdapter(private val context: Context,private val results: List<Result?>?): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    class MainViewHolder(view: View): RecyclerView.ViewHolder(view){
+    internal inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view){
 
             val nameTv:TextView = view.findViewById(R.id.name)
             val statusTv:TextView = view.findViewById(R.id.status)
@@ -21,23 +21,24 @@ class MainAdapter(private val context: Context,private val results: List<Result?
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_rv, parent, false)
-        return MainViewHolder(v)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater.inflate(R.layout.item_rv, parent, false)
+        return MainViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val result = results?.get(position)
-        if(results != null) {
-            Glide.with(context).load(result?.image).into(holder.imageIv)
+        if(result != null) {
+            Glide.with(context).load(result.image).into(holder.imageIv)
         }
-        if (results != null){
-            holder.nameTv.text = result?.name
+        if (result != null){
+            holder.nameTv.text = result.name
         }
-        if (results != null){
-            holder.statusTv.text = result?.status
+        if (result != null){
+            holder.statusTv.text = result.status
         }
-        if (results != null){
-            holder.speciesTv.text = result?.species
+        if (result != null){
+            holder.speciesTv.text = result.species
         }
     }
 
