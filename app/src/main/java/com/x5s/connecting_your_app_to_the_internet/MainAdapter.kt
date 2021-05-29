@@ -11,12 +11,12 @@ import com.bumptech.glide.Glide
 
  internal class MainAdapter(private val context: Context,private val results: List<Result?>?): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    internal inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view){
+    internal inner class MainViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-            val nameTv:TextView = view.findViewById(R.id.name)
-            val statusTv:TextView = view.findViewById(R.id.status)
-            val speciesTv:TextView = view.findViewById(R.id.species)
-            val imageIv:ImageView = view.findViewById(R.id.image)
+            val nameTv:TextView = itemView.findViewById(R.id.name)
+            val statusTv:TextView = itemView.findViewById(R.id.status)
+            val speciesTv:TextView = itemView.findViewById(R.id.species)
+            val imageIv:ImageView = itemView.findViewById(R.id.image)
     }
 
 
