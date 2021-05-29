@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MainAdapter(private val context: Context,
-                  private val results: List<Result?>?
-): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class MainAdapter(private val context: Context,private val results: List<Result?>?): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     class MainViewHolder(view: View): RecyclerView.ViewHolder(view){
 
@@ -42,8 +40,6 @@ class MainAdapter(private val context: Context,
             holder.speciesTv.text = result?.species
         }
     }
-
-
 
     override fun getItemCount(): Int {
         if (results != null) {
