@@ -1,5 +1,6 @@
 package com.x5s.connecting_your_app_to_the_internet
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,40 +9,43 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MainAdapter(
-        private val results: List<Property>
-): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+ internal class MainAdapter(private val context: Context,private val results: List<Result?>?): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    class MainViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    internal inner class MainViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        fun bind(property: Property){
-            val nameTv = view.findViewById<TextView>(R.id.name)
-            val statusTv = view.findViewById<TextView>(R.id.status)
-            val speciesTv = view.findViewById<TextView>(R.id.species)
-            val imageIv = view.findViewById<ImageView>(R.id.image)
-
-            nameTv.text = property.name
-            statusTv.text = property.status
-            speciesTv.text = property.species
-
-            Glide.with(view.context).load(property.image).centerCrop().into(imageIv)
-
-        }
+            val nameTv:TextView = itemView.findViewById(R.id.name)
+            val statusTv:TextView = itemView.findViewById(R.id.status)
+            val speciesTv:TextView = itemView.findViewById(R.id.species)
+            val imageIv:ImageView = itemView.findViewById(R.id.image)
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_rv, parent, false)
-        return MainViewHolder(v)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater.inflate(R.layout.item_rv, parent, false)
+        return MainViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(results[position])
+        val result = results?.get(position)
+        if(result != null) {
+            Glide.with(context).load(result.image).into(holder.imageIv)
+        }
+        if (result != null){
+            holder.nameTv.text = result.name
+        }
+        if (result != null){
+            holder.statusTv.text = result.status
+        }
+        if (result != null){
+            holder.speciesTv.text = result.species
+        }
     }
 
-
-
     override fun getItemCount(): Int {
-        return results.size
+        if (results != null) {
+            return results.size
+        }
+        return 0
     }
 }
